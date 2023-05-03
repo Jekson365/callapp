@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { create } from 'zustand'
+
 import { Data, userStore } from '../App'
 
 import { Table } from 'antd'
+import { Editmodal } from './Editmodal'
 
 export const Main = () => {
     const users = userStore((state) => state.users)
@@ -72,9 +74,38 @@ export const Main = () => {
 
     ];
 
+    const [modal, setModal] = useState<boolean>(false)
+    const [modalEditData, setModalEditData] = useState<Data>()
+
+    const handleCancel = () => {
+        setModal(false)
+        console.log(modal)
+    }
+    const handleOk = () => {
+        setModal(false)
+        console.log(modal)
+    }
+
+    const handleClick = (CurrentData: Data) => {
+        setModal(true)
+        setModalEditData(CurrentData)
+    }
+
     return (
         <>
-            <Table dataSource={users[0]} columns={columns} />
+            <Editmodal modal={modal}
+                modalEditData={modalEditData}
+                handleCancel={handleCancel} handleOk={handleOk} />
+            <Table
+                dataSource={users[0]}
+                columns={columns}
+                rowClassName={'myrow'}
+                onRow={(data) => {
+                    return {
+                        onClick: () => handleClick(data)
+                    }
+                }}
+            />
         </>
     )
 }
