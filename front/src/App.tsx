@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { Main } from './components/Main'
 import create from 'zustand'
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import { Chart } from './pages/Chart'
 
 export interface Data {
   id: number,
@@ -16,11 +18,6 @@ export interface Data {
   phone: string,
 
 }
-const foo: Data['address'] = { street: "", city: "" }
-const { street, city } = foo
-console.log(street)
-console.log(city)
-
 type User = {
   users: any[],
   addUser: (user: Data) => void,
@@ -43,7 +40,12 @@ export const userStore = create<User>((set) => ({
 function App() {
   return (
     <>
-      <Main />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Main/>}/>
+          <Route path='/chart' element={<Chart/>}/>
+        </Routes>
+      </BrowserRouter>
     </>
 
   )

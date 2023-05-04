@@ -5,8 +5,9 @@ import { create } from 'zustand'
 
 import { Data, userStore } from '../App'
 
-import { Table } from 'antd'
+import { Button, Table } from 'antd'
 import { Editmodal } from './Editmodal'
+import { Addmodal } from './Addmodal'
 
 export const Main = () => {
     const users = userStore((state) => state.users)
@@ -23,7 +24,7 @@ export const Main = () => {
 
     const handleDelete = (id: number) => {
         axios.post(`http://localhost:8080/deleteuser/${id}`)
-            .then((res) => {
+            .then(() => {
                 location.reload()
                 console.log("user deleted")
 
@@ -68,13 +69,14 @@ export const Main = () => {
             title: 'action',
             dataIndex: 'id',
             key: 'action',
-            render: (id: Data['id']) => <button onClick={() => handleDelete(id)}>delete</button>
+            render: (id: Data['id']) => <Button onClick={() => handleDelete(id)}>delete</Button>
         },
 
 
     ];
 
     const [modal, setModal] = useState<boolean>(false)
+    const [addModal, setAddModal] = useState<boolean>(false)
     const [modalEditData, setModalEditData] = useState<Data>()
 
     const handleCancel = () => {
@@ -93,6 +95,11 @@ export const Main = () => {
 
     return (
         <>
+            <Button type='primary' onClick={() => setAddModal(true)}>add new user</Button>
+            <Addmodal
+                addModal={addModal}
+                setAddModal={setAddModal}
+            />
             <Editmodal
                 modal={modal}
                 setModal={setModal}
@@ -106,7 +113,7 @@ export const Main = () => {
                 rowClassName={'myrow'}
                 onRow={(data) => {
                     return {
-                        onClick: () => handleClick(data)
+                        onDoubleClick: () => handleClick(data)
                     }
                 }}
             />

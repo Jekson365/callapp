@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { Modal, Form, Input, Button, Select } from 'antd'
 import axios from 'axios'
+import { Data } from '../App'
 
 const { Option } = Select
+
 
 export const Editmodal: React.FC<any> = (props) => {
     const [form] = Form.useForm()
@@ -11,7 +13,7 @@ export const Editmodal: React.FC<any> = (props) => {
         props.setModal(false)
         console.log(values)
 
-        const dataToSend = {
+        const dataToSend: Data = {
             id: props.modalEditData.id,
             name: values.name,
             email: values.email,
@@ -22,6 +24,7 @@ export const Editmodal: React.FC<any> = (props) => {
             },
             phone: values.phone
         }
+        
         axios.put(`http://localhost:8080/updateuser/${props.modalEditData.id}`, dataToSend)
             .then(() => {
                 console.log("success!")
@@ -60,8 +63,8 @@ export const Editmodal: React.FC<any> = (props) => {
                 <Form
                     form={form}
                     name="basic"
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}
+                    labelCol={{ span: 3 }}
+                    wrapperCol={{ span: 19 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
@@ -94,9 +97,9 @@ export const Editmodal: React.FC<any> = (props) => {
                         name="gender"
                         rules={[{ required: true, message: 'Please input your gender!' }]}
                     >
-                        <Select defaultValue={'male'}>
-                            <Option>male</Option>
-                            <Option>female</Option>
+                        <Select>
+                            <Option value="male">male</Option>
+                            <Option value="female">female</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item
@@ -104,8 +107,7 @@ export const Editmodal: React.FC<any> = (props) => {
                         name="phone"
                         rules={[
                             { required: true, message: 'Please input your phone!' },
-                            { min: 9 },
-                            { pattern: /^[0-9]+$/, message: "filed must be an phone number" }
+                            { min: 9, message: "filed must be an phone number" },
                         ]}
                     >
                         <Input />
@@ -129,7 +131,7 @@ export const Editmodal: React.FC<any> = (props) => {
                     </Form.Item>
 
 
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
                         <Button type="primary" htmlType="submit">
                             edit
                         </Button>
