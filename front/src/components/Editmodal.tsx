@@ -20,7 +20,7 @@ export const Editmodal: React.FC<any> = (props) => {
             gender: values.gender,
             address: {
                 street: values.street,
-                city: values.street,
+                city: values.city,
             },
             phone: values.phone
         }

@@ -1,7 +1,5 @@
-import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { create } from 'zustand'
 
 import { Data, userStore } from '../App'
 
@@ -33,7 +31,7 @@ export const Main = () => {
                 console.log(err)
             })
     }
-    const columns = [
+    const columns: any = [
         {
             title: 'id',
             dataIndex: 'id',
@@ -95,6 +93,7 @@ export const Main = () => {
 
     return (
         <>
+            <Button type='primary' href='/chart'>chart</Button>
             <Button type='primary' onClick={() => setAddModal(true)}>add new user</Button>
             <Addmodal
                 addModal={addModal}

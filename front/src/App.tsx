@@ -1,10 +1,7 @@
-import { useState } from 'react'
-import axios from 'axios'
-import { useEffect } from 'react'
 import { Main } from './components/Main'
 import create from 'zustand'
-import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import { Chart } from './pages/Chart'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 export interface Data {
   id: number,
@@ -42,8 +39,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Main/>}/>
-          <Route path='/chart' element={<Chart/>}/>
+          <Route path='/' element={<Main />} />
+          <Route path='/chart' element={<Chart/>} />
         </Routes>
       </BrowserRouter>
     </>
