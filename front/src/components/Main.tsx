@@ -81,9 +81,9 @@ export const Main = () => {
         setModal(false)
         console.log(modal)
     }
-    const handleOk = () => {
+    const handleOk = (values: any) => {
         setModal(false)
-        console.log(modal)
+        console.log(values)
     }
 
     const handleClick = (CurrentData: Data) => {
@@ -93,9 +93,13 @@ export const Main = () => {
 
     return (
         <>
-            <Editmodal modal={modal}
+            <Editmodal
+                modal={modal}
+                setModal={setModal}
                 modalEditData={modalEditData}
-                handleCancel={handleCancel} handleOk={handleOk} />
+                handleCancel={handleCancel}
+                handleOk={handleOk}
+            />
             <Table
                 dataSource={users[0]}
                 columns={columns}

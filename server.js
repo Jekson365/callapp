@@ -21,8 +21,8 @@ app.use(cors())
 app.get("/", (req, res) => { res.send("hello world") })
 app.get("/data", fetchData)
 app.post("/deleteuser/:id", deleteData)
-app.put("/updateuser/:id",updateData)
-app.post("/addnew",addNewUser)
+app.put("/updateuser/:id", updateData)
+app.post("/addnew", addNewUser)
 
 
 app.listen(PORT_NUMBER, () => {
