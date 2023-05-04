@@ -61,7 +61,7 @@ export const Main = () => {
             title: 'address',
             dataIndex: 'address',
             key: 'address',
-            render: (address: Data['address']) => `${address.city} - ${address.street}`
+            render: (address: Data['address']) => `${address?.city} - ${address?.street}`
         },
         {
             title: 'action',
